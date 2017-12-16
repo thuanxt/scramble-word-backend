@@ -30,17 +30,19 @@ public class ScrambleWordService implements WordService {
 
     private List<String> getAllPermutation(String str) {
         List<String> result = new ArrayList<>();
-        permutation(result, "", str);
+        for (int i = 0; i < str.length(); i++) {
+            permutation(result, "", str, i);
+        }
         return result;
     }
 
-    private void permutation(List<String> result, String prefix, String str) {
+    private void permutation(List<String> result, String prefix, String str, Integer k) {
         int n = str.length();
-        if (n == 0) {
+        if (n == k) {
             result.add(prefix);
         } else {
             for (int i = 0; i < n; i++) {
-                permutation(result, prefix + str.charAt(i), str.substring(0, i) + str.substring(i + 1, n));
+                permutation(result, prefix + str.charAt(i), str.substring(0, i) + str.substring(i + 1, n), k);
             }
         }
     }
